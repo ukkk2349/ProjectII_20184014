@@ -1,2 +1,1 @@
-Tài khoản Admin: admin@gmail.com
-Mật khẩu: 1
+npm install => npm run serve => npm run dev

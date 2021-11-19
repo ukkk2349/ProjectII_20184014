@@ -1,1 +1,2 @@
-# ProjectII_20184014
+Tài khoản Admin: admin@gmail.com
+Mật khẩu: 1

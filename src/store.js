@@ -66,7 +66,12 @@ export const store = createStore({
               }
             }
             console.log('login successful')
-            router.go(-1)
+            if (localStorage.getItem('isAdmin') == 1) {
+              router.replace('/admin')
+            } else {
+              router.go(-1)
+            }
+            
           }
 
         },
@@ -310,6 +315,9 @@ export const store = createStore({
           setTimeout(function () {
             message.innerHTML = ""
           }, 2000);
+          var quantity = localStorage.getItem('cart');
+          quantity++;
+          localStorage.setItem('cart', quantity);
         },
           err => {
             authData.error = err.response.data.error

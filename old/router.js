@@ -296,24 +296,20 @@ router.get('/cart/:id', async (req, res) => {
 router.post('/add-to-cart/', async (req, res) => {
   const body = req.body
   const hasProduct = await cartService.findByProductId(body.userId, body.productId)
-  var quantity = localStorage.getItem('cart')
 
   if (hasProduct) {
+    var quantity = hasProduct.quantity
     if(hasProduct.productId < 100) {
-      hasProduct.quantity++
       quantity++
-      localStorage.setItem('cart', quantity)
     }
-    await cartService.updateProduct(hasProduct.id, hasProduct.userId, hasProduct.productId, hasProduct.infomation, hasProduct.quantity, 0)
+    const result = await cartService.updateProduct(hasProduct.id, hasProduct.userId, hasProduct.productId, hasProduct.infomation, quantity, 0)
       .catch(e => console.error(e))
-    res.send(hasProduct)
+    res.send(result)
     return
   }
   else
   {
     const addToCart = await cartService.addProduct(body.userId, body.productId, body.infomation, body.quantity, 0)
-    quantity++
-    localStorage.setItem('cart', quantity)
     res.send(addToCart)
   }
 })
